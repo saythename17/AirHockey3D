@@ -1,11 +1,17 @@
-package com.icandothisallday2021.airhockey3d;
+package com.icandothisallday2021.airhockey3d.Helper;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.util.Log;
+
+import com.icandothisallday2021.airhockey3d.LoggerConfig;
 
 public class TextureHelper {
     static String TAG="TextureHelper";
@@ -25,7 +31,8 @@ public class TextureHelper {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;//This tells Android that I want the original image data instead of a scaled version of the data.
 
-        final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId, options);
+        Resources res = context.getResources();
+        final Bitmap bitmap = BitmapFactory.decodeResource(res, resourceId, options);
         //This call will decode the image into bitmap or will return null--if it failed.
 
         if(bitmap == null){
@@ -66,10 +73,17 @@ public class TextureHelper {
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
         //OpenGL reads in the bitmap data defined by bitmap and copy it over into the texture object that is currently bound.
 
+        // Note: Following code may cause an error to be reported in the
+        // ADB log as follows: E/IMGSRV(20095): :0: HardwareMipGen:
+        // Failed to generate texture mipmap levels (error=3)
+        // No OpenGL error will be encountered (glGetError() will return
+        // 0). If this happens, just squash the source image to be
+        // square. It will look the same because of texture coordinates,
+        // and mipmap generation will work.
+        GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D);//OpenGL generates all of the necessary levels
+
         //Now that the data's been loaded into OpenGL->no longer need to keep the Android bitmap->release the data immediately
         bitmap.recycle();
-
-        GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D);//OpenGL generates all of the necessary levels
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0);
         //finished loading texture-> unbind from the current texture, so we don't changes with other texture calls

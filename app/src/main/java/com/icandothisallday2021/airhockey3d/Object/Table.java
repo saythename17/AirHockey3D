@@ -1,6 +1,10 @@
-package com.icandothisallday2021.airhockey3d;
+package com.icandothisallday2021.airhockey3d.Object;
 
 import android.opengl.GLES20;
+
+import com.icandothisallday2021.airhockey3d.Program.Constants;
+import com.icandothisallday2021.airhockey3d.Program.TextureShaderProgram;
+import com.icandothisallday2021.airhockey3d.VertexArray;
 
 public class Table {
     private static final int POSITION_COMPONENT_COUNT = 2;

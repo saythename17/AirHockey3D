@@ -1,7 +1,9 @@
-package com.icandothisallday2021.airhockey3d;
+package com.icandothisallday2021.airhockey3d.Helper;
 
 import android.opengl.GLES20;
 import android.util.Log;
+
+import com.icandothisallday2021.airhockey3d.LoggerConfig;
 
 import static android.opengl.GLES20.GL_COMPILE_STATUS;
 import static android.opengl.GLES20.GL_FRAGMENT_SHADER;

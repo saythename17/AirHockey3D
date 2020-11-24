@@ -1,9 +1,10 @@
-package com.icandothisallday2021.airhockey3d;
+package com.icandothisallday2021.airhockey3d.Program;
 
-import android.content.Context;
 import android.opengl.GLES20;
 
-public class TextureShaderProgram extends ShaderProgram{
+import com.icandothisallday2021.airhockey3d.Program.ShaderProgram;
+
+public class TextureShaderProgram extends ShaderProgram {
 
     //Uniform locations
     private final int uMatrixLocation;
@@ -13,7 +14,7 @@ public class TextureShaderProgram extends ShaderProgram{
     private final int aPositionLocation;
     private final int aTextureCoordinatesLocations;
 
-    protected TextureShaderProgram() {
+    public TextureShaderProgram() {
         super();
 
         //Retrieve(회수하다) uniform locations for the shader program.

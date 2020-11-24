@@ -1,4 +1,4 @@
-package com.icandothisallday2021.airhockey3d;
+package com.icandothisallday2021.airhockey3d.Helper;
 
 public class MatrixHelper {
     public static void perspectiveM (float[] m, float yFovInDegrees, float aspect, float n, float f) {
